@@ -22,7 +22,7 @@ plot(Gold_ts)
 gold_time_series <- window(Gold_ts, start = c(2018,12))
 plot(gold_time_series)
 
-### 2. Please summaries your observations of the times series plot
+### 2. summarizing observations of the times series plot
 
 # We see that for the time series plot, the gold prices rise tremendously from 2019 to mid 2020 followed by a series of rise and falls after and then eventually rising to the highest.
 
@@ -46,7 +46,7 @@ summary(gold_time_series)
 
 ```
 
-# 2. Can you show the box plot?
+# 2. box plot
 
 ```{r}
 boxplot(gold_time_series,  main = "Box Plot of Gold prices Data (from 2018)")
@@ -54,7 +54,7 @@ hist(gold_time_series, main = "Histogram Plot of Gold prices Data (from 2018)")
 Acf(gold_time_series, main = "Acf of Gold prices Data (from 2018)")
 ```
 
-# 3. Can you summarize your observation about the time series from the summary stats and box plot?
+# 3. Summarizing observations about the time series from the summary stats and box plot.
 
 # Observations : From the summary, we can figure out that the median value is more than the mean. 
 #                The median values are closer to the 3rd quartile values. From the median being more than the   #                mean, the data is right skewed. From the ACF plot, we can analyze that the first 7 lines are   #                 above the treshold limit which says that there is a trend in the data. After the 14th line,the #                ACF plot goes into a negative value and this says that there is seasonality.
