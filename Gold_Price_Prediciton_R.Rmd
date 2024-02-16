@@ -17,18 +17,16 @@ plot(Gold_ts)
 ```
 
 ```{r}
-#### 1. Show a time series plot
+#### 1. time series plot
 
 gold_time_series <- window(Gold_ts, start = c(2018,12))
 plot(gold_time_series)
 
 ### 2. summarizing observations of the times series plot
 
-# We see that for the time series plot, the gold prices rise tremendously from 2019 to mid 2020 followed by a series of rise and falls after and then eventually rising to the highest.
+# Insights : We see that for the time series plot, the gold prices rise tremendously from 2019 to mid 2020 followed by a series of rise and falls after and then eventually rising to the highest.
 
 ```
-
-
 
 # Central Tendency
 
@@ -62,7 +60,7 @@ Acf(gold_time_series, main = "Acf of Gold prices Data (from 2018)")
 
 ## Decomposition
 
-# 1. Plot the decomposition of the time series
+# 1. Plotting the decomposition of the time series
 
 ```{r}
 stl_decomp <- stl(gold_time_series,s.window ="periodic")
@@ -70,9 +68,9 @@ plot(stl_decomp, main = 'Decomposition plot')
 
 ```
 
-# 2. Is the times series seasonal? : Yes, the times series has a seasonal component.
+# 2. Checking if the time series is seasonal? : Yes, the times series has a seasonal component.
 
-# 3. Is the decomposition additive or multiplicative?
+# 3. Find out if the decomposition is additive or multiplicative?
 
 ```{r}
 decom <- decompose(gold_time_series)
@@ -81,13 +79,13 @@ decom$type
 
 # Yes this is additive. 
 
-# 4. If seasonal, what are the values of the seasonal monthly indices?
+# 4. If it is seasonal, what would be the values of the seasonal monthly indices?
 
 ```{r}
 decom$figure
 ```
 
-# 5. For which month is the value of time series high and for which month is it low?
+# 5. Which month of the time series has high value and for which month is it low?
 
 # The time series values have high values in the month of June and the lowest in the month of December.
 
@@ -110,15 +108,13 @@ gold_naive = naive(gold_time_series)
 plot(gold_naive, main = "Naive Forecast")
 ```
 
-# 2. Perform Residual Analysis for this technique.
+# 2. Residual Analysis for this technique.
 
-# 3. Do a plot of residuals. What does the plot indicate?
+# 3. plot of residuals.
 
 ```{r}
 plot(gold_naive$residuals, main = "Naive forecast residuals plot for gold data")
 ```
-
-# Inferences : (Pending)
 
 # 4. Do a Histogram plot of residuals. What does the plot indicate?
 
@@ -126,9 +122,9 @@ plot(gold_naive$residuals, main = "Naive forecast residuals plot for gold data")
 hist(gold_naive$residuals, main ='Histogram of Residuals')
 ```
 
-# Inferences : The Hist plot shows us that the data is not normally distributed. It also tells us that the data                is biased.
+# Inferences : The Hist plot shows us that the data is not normally distributed. It also tells us that the data is biased.
 
-# 5. Do a plot of fitted values vs. residuals. What does the plot indicate?
+# 5. plot of fitted values vs. residuals. What does the plot indicate?
 
 ```{r}
 cbind(Fitted = fitted(gold_naive),
@@ -139,7 +135,7 @@ cbind(Fitted = fitted(gold_naive),
 #Inferences: The graph shows Heteroscedasticity which means that the variance of the residuals is not constant across the range of fitted values. The values are also random.
 ```
 
-# 6.  Do a plot of actual values vs. residuals. What does the plot indicate?
+# 6.  plot of actual values vs. residuals. What does the plot indicate?
 
 ```{r}
 cbind(Actual = gold_time_series,
@@ -150,7 +146,7 @@ cbind(Actual = gold_time_series,
 #Inferences : The Actual vs residuals plot is very similar to the fitted vs residuals. The graph shows Heteroscedasticity which means that the variance of the residuals is not constant across the range of fitted values. The values are also random.
 ```
 
-# 7. Do an ACF plot of the residuals? What does this plot indicate?
+# 7. ACF plot of the residuals. What does this plot indicate?
 
 ```{r}
 Acf(gold_naive$residuals, main = "ACF of Naive residuals")
@@ -158,7 +154,7 @@ Acf(gold_naive$residuals, main = "ACF of Naive residuals")
 # Inferences :  Values of the Acf have not crossed the confidence level meaning there is no trend in the residuals. 
 ```
 
-## Print the 5 measures of accuracy for this forecasting technique
+## Printing the 5 measures of accuracy for this forecasting technique
 
 ```{r}
 naive_accuracy <- accuracy(gold_naive)
@@ -174,7 +170,7 @@ forecast(gold_time_series)
 plot(forecast(gold_time_series))
 ```
 
-# 2. Summarize this forecasting technique
+# 2. Summarizing this forecasting technique
 
 # How good is the accuracy? : The RMSE is pretty high for this forecast which means that we might not be able to proceed with it. 
 
@@ -183,10 +179,10 @@ plot(forecast(gold_time_series))
 
 ## Simple Moving Averages
 
-# 1. Plot the graph for time series
-# 2. Show the Simple Moving average of order 3 on the plot above in Red
-# 3. Show the Simple Moving average of order 6 on the plot above in Blue
-# 4. Show the Simple Moving average of order 9 on the plot above in Green
+# 1. Plotting the graph for time series
+# 2. Showing the Simple Moving average of order 3 on the plot above in Red
+# 3. Showing the Simple Moving average of order 6 on the plot above in Blue
+# 4. Showing the Simple Moving average of order 9 on the plot above in Green
 
 ```{r}
 mavg_forecast3 = ma(gold_time_series,order=3)
@@ -200,7 +196,7 @@ lines(mavg_forecast9, col="Green")
 #Inferences : MAV of 3 is a better overlapping forecast as ciompared to other ones. 
 ```
 
-# 5. (Bonus) show the forecast of next 12 months using one of the simple average order that you feel works best for time series. 
+# 5. Plot the forecast of next 12 months using one of the simple average order that works best for time series. 
 
 ```{r}
 MA3_forecast <- forecast(mavg_forecast3, h = 12)
@@ -208,13 +204,9 @@ plot(MA3_forecast)
 
 ```
 
-# 6. What are your observations of the plot as the moving average order goes up? (pending)
-
-
-
 ## Simple Smoothing
 
-# 1. Perform a simple smoothing forecast for next 12 months for the time series.
+# 1. Performing a simple smoothing forecast for next 12 months for the time series.
 
 ```{r}
 ses_data <- ses(gold_time_series)
@@ -222,7 +214,7 @@ plot(ses_data)
 ```
 
 
-# 2. What is the value of alpha? What does that value signify? 
+# 2. value of alpha? & what does that value signify? 
 
 # Ans : 0.8983. Alpha specifies the coefficient for the level smoothing. Values near 1.0 mean that the latest value has more weight.
 
@@ -239,7 +231,7 @@ summary(ses_data)
 ```
 
 
-# Perform Residual Analysis for this technique
+# Performing Residual Analysis for this technique
 
 # Do a plot of residuals. What does the plot indicate?
 
@@ -250,7 +242,7 @@ plot(ses_data$residuals, main = "Simple Smoothing forecast residuals plot")
 # Inferences : The residuals look like they have seasonality. They do not have a mean at zero.
 
 
-# Do a Histogram plot of residuals. What does the plot indicate?
+# Histogram plot of residuals. What does the plot indicate?
 
 ```{r}
 hist(ses_data$residuals, main ='Histogram of Residuals')
@@ -259,7 +251,7 @@ hist(ses_data$residuals, main ='Histogram of Residuals')
 # Inferences : The histplot a normal distribution in an ideal case. The histogram does not appears to be normally distributed & their values do not have a mean zero. This means that the data is biased as the mean is not zero.
 
 
-###### Do a plot of fitted values vs. residuals. What does the plot indicate?
+######plot of fitted values vs. residuals. What does the plot indicate?
 
 ```{r}
 cbind(Fitted = fitted(ses_data),
@@ -271,7 +263,7 @@ cbind(Fitted = fitted(ses_data),
 #Inferences : The Actual vs residuals plot is very similar to the fitted vs residuals. The graph shows Heteroscedasticity which means that the variance of the residuals is not constant across the range of fitted values. The values are also random.
 
 
-###### Do a plot of actual values vs. residuals. What does the plot indicate?
+###### plot of actual values vs. residuals. What does the plot indicate?
 
 ```{r}
 cbind(Actual = gold_time_series,
@@ -285,7 +277,7 @@ cbind(Actual = gold_time_series,
 
 
 
-###### Do an ACF plot of the residuals? What does this plot indicate?
+###### ACF plot of the residuals? What does this plot indicate?
 
 ```{r}
 Acf(ses_data$residuals, main = "ACF of Naive residuals")
@@ -294,7 +286,7 @@ Acf(ses_data$residuals, main = "ACF of Naive residuals")
 #Inferences : The values have not crossed the confidence intervals & there is no seasonality. 
 
 
-## Print the 5 measures of accuracy for this forecasting technique
+## Printing the 5 measures of accuracy for this forecasting technique
 
 ```{r}
 ses_accuracy <- accuracy(ses_data)
@@ -323,7 +315,7 @@ plot(forecast(ses_data))
 
 ## HoltWinters
 
-# 1. Perform Holt-Winters forecast for next 12 months for the time series.
+# 1. Performing Holt-Winters forecast for next 12 months for the time series.
 
 ```{r}
 HW_forecast <- hw(gold_time_series, seasonal = "additive")
@@ -333,24 +325,20 @@ hw_add <- forecast(HW_forecast)
 hw_add$model
 ```
 
-
-#Inferences : (Pending)
-
-
-#1 What is the value of alpha? What does that value signify? 
+#1 value of alpha? What does that value signify? 
 
 #Ans : 0.9262 . Alpha specifies the coefficient for the level smoothing in Holtwinters.
 
-#2. What is the value of beta? What does that value signify?
+#2. value of beta? What does that value signify?
 
 #Ans : 2e-04 . Beta specifies the coefficient for the trend smoothing in Holtwinters.
 
-#3.What is the value of gamma? What does that value signify?
+#3. value of gamma? What does that value signify?
 
 #Ans : 1e-04 Gamma specifies the coefficient for the trend smoothing in Holtwinters.
 
 
-#4. What is the value of initial states for the level, trend and seasonality? What do these values signify?
+#4. value of initial states for the level, trend and seasonality? What do these values signify?
 
 #Ans : l = 121.6981 ,  b = 1.5747 , s = -5.2835 -4.7104 -3.8007 4.2063 4.4507 0.7968 4.4918 3.4419 -0.5184                                              -3.1621 1.166 -1.0784
 
@@ -360,9 +348,9 @@ hw_add$model
 #Ans : 7.1693 . Sigma defines the variance of the forecast values.
 
 
-# Perform Residual Analysis for this technique.
+# Performing Residual Analysis for this technique.
 
-# 1. Do a plot of residuals. What does the plot indicate?
+# 1. Plot of residuals. What does the plot indicate?
 
 ```{r}
 plot(hw_add$residuals, main = "Simple Smoothing forecast residuals plot")
@@ -370,7 +358,7 @@ plot(hw_add$residuals, main = "Simple Smoothing forecast residuals plot")
 
 #Inferences : The residuals do have a mean at zero for a lot of values as compared to previous ones. This looks like the best case. 
 
-# Do a Histogram plot of residuals. What does the plot indicate?
+# Histogram plot of residuals. What does the plot indicate?
 
 ```{r}
 hist(hw_add$residuals, main ='Histogram of Residuals')
@@ -378,7 +366,7 @@ hist(hw_add$residuals, main ='Histogram of Residuals')
 #Inferences : The data looks to be normally distributed. 
 
 
-#. Do a plot of fitted values vs. residuals. What does the plot indicate?
+#. Plot of fitted values vs. residuals. What does the plot indicate?
 
 ```{r}
 cbind(Fitted = fitted(hw_add),
@@ -389,7 +377,7 @@ cbind(Fitted = fitted(hw_add),
 
 #Infeences : The Fitted vs Residuals plot is random.
 
-# Do a plot of actual values vs. residuals. What does the plot indicate?
+# Plot of actual values vs. residuals. What does the plot indicate?
 
 ```{r}
 cbind(Actual = gold_time_series,
@@ -401,7 +389,7 @@ cbind(Actual = gold_time_series,
 #Inferences : The Actual vs Residuals plot is random.
 
 
-###### Do an ACF plot of the residuals? What does this plot indicate?
+###### ACF plot of the residuals? What does this plot indicate?
 
 ```{r}
 Acf(hw_add$residuals, main = "ACF of Naive residuals")
@@ -409,7 +397,7 @@ Acf(hw_add$residuals, main = "ACF of Naive residuals")
 #Inferences : From Acf plot, we can see that none of the values crossed the confidence levels.This shows us that the forecast is a good as compared to others. 
 
 
-# Print the 5 measures of accuracy for this forecasting technique
+# Printing the 5 measures of accuracy for this forecasting technique
 
 ```{r}
 hw_accuracy <- accuracy(hw_add)
@@ -577,7 +565,7 @@ print(accuracy_table)
 ##Conclusion
 
 
-#1. Summarize your analysis of time series value over the time-period.
+#1. Summarizing the analysis of time series value over the time-period.
 
 #The data does have trend and seasonality and we found the same with Acf plots. From the forecasting methods naive, simple smoothing, and HoltWinters, we can see that HoltWinters forecast gives us the best forecasting method in this case.
 #Forecast is good because the error values are quiet low for HoltWinters.
@@ -585,6 +573,6 @@ print(accuracy_table)
 
 
 
-#2. Based on your analysis and forecast above, do you think the value of the time series will increase, decrease or stay flat over the next year? How about next 2 years?
+#2. Based on the analysis and forecast above, will the value of the time series will increase, decrease or stay flat over the next year? How about next 2 years?
 
 #the time series will increase over the next & next 2 years.
