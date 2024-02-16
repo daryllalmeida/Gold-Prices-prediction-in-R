@@ -1,5 +1,5 @@
 ---
-title: "BF_Final_Exam_Fall23"
+title: "GoldPricePrediction"
 author: "Daryll Dalmeida"
 date: "12/04/2023"
 output: html_document
